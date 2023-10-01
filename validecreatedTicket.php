@@ -14,7 +14,7 @@ session_start();
         $contenu = htmlentities($_POST['contenu'],ENT_COMPAT,"ISO-8859-1",true);
         $date = date("Y-m-d H:i:s");
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host=51.178.86.117;dbname=blog;charset=utf8', 'dario', 'dab3oeP-');
         } catch( Exception $e) {
             die( 'Erreur : ' . $e->getMessage() );
         }

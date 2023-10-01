@@ -13,7 +13,7 @@ session_start();
         $login = htmlentities($_POST['login'],ENT_COMPAT,"ISO-8859-1",true);
         $password = htmlentities($_POST['password'],ENT_COMPAT,"ISO-8859-1",true);
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host=51.178.86.117;dbname=blog;charset=utf8', 'dario', 'dab3oeP-');
         } catch( Exception $e) {
             die( 'Erreur : ' . $e->getMessage() );
         }

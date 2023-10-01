@@ -2,7 +2,7 @@
 session_start();
 if(isset ($_POST["login"]) && isset ($_POST["password"])){
     try {
-        $bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
+        $bdd = new PDO('mysql:host=51.178.86.117;dbname=blog;charset=utf8', 'dario', 'dab3oeP-');
     } catch (Exception $e){
         die('Erreur :' . $e->getMessage());
     }
