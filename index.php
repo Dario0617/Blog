@@ -10,7 +10,7 @@ session_start();
 
 <?php
     try {
-        $bdd = new PDO('mysql:host=51.178.86.117;dbname=blog;charset=utf8', 'dario', 'dab3oeP-');
+        $bdd = new PDO('mysql:host=51.178.86.117;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
     } catch( Exception $e) {
         die( 'Erreur : ' . $e->getMessage() );
     }
