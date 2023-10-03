@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="ISO-8859"/>
-    <link rel="stylesheet" href="../../CSS/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
     <title> ReceptProfilePicture </title>
 </head>
 
@@ -35,7 +35,7 @@
                             move_uploaded_file($_FILES["myfile"]["tmp_name"], "images/" . 
                             basename($_FILES["myfile"]["name"]));
                             try {
-                                $bdd = new PDO('mysql:host=51.178.86.117;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
+                                $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
                             } catch (Exception $e){
                                 die('Erreur :' . $e->getMessage());
                             }

@@ -2,7 +2,7 @@
     session_start();
     if(isset ($_SESSION['id'])){
         try {
-            $bdd = new PDO('mysql:host=51.178.86.117;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
+            $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
         } catch (Exception $e){
             die('Erreur :' . $e->getMessage());
         }
@@ -30,7 +30,7 @@
 <head>
     <title>Profile</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../CSS/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
 </head>
 
 <body>

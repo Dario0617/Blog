@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="ISO-8859"/>
-    <link rel="stylesheet" href="../../CSS/bootstrap.css"/>
+    <link rel="stylesheet" href="css/bootstrap.css" />
     <title> Connexion </title>
 </head>
 

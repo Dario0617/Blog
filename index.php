@@ -5,7 +5,7 @@ session_start();
 <head>
     <title>Mon super blog !</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../CSS/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
 </head>
 
 <?php

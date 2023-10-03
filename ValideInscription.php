@@ -1,19 +1,11 @@
 <?php
-session_start();
-?>
-<html lang="fr">
-<head>
-    <title></title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../../CSS/bootstrap.css" />
-</head>
+    session_start();
 
-<?php
     if( isset( $_POST['login'] ) && isset( $_POST['password'] ) ) {
         $login = htmlentities($_POST['login'],ENT_COMPAT,"ISO-8859-1",true);
         $password = htmlentities($_POST['password'],ENT_COMPAT,"ISO-8859-1",true);
         try {
-            $bdd = new PDO('mysql:host=51.178.86.117;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
+            $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
         } catch( Exception $e) {
             die( 'Erreur : ' . $e->getMessage() );
         }
