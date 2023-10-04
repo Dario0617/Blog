@@ -1,18 +1,20 @@
 <?php
     session_start();
-    echo (isset( $_POST['login'] ) && isset( $_POST['password'] ));
     if( isset( $_POST['login'] ) && isset( $_POST['password'] ) ) {
         $login = htmlentities($_POST['login'],ENT_COMPAT,"ISO-8859-1",true);
         $password = htmlentities($_POST['password'],ENT_COMPAT,"ISO-8859-1",true);
-        echo $login;
-        echo $password;
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
+            echo $bdd;
+            echo strval($bdd);
         } catch( Exception $e) {
+            echo $e->getMessage();
             die( 'Erreur : ' . $e->getMessage() );
         }
         $sql = 'SELECT * FROM users WHERE login=:login';
+        echo $sql;
         $reponse = $bdd->prepare( $sql );
+        echo $reponse = $bdd->prepare( $sql );;
         $reponse->execute( [':login'=>$login] );
         echo $reponse->fetch(PDO::FETCH_ASSOC);
         if( $acces = $reponse->fetch(PDO::FETCH_ASSOC) ) {
