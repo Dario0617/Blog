@@ -33,7 +33,6 @@
             SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
             $sql = 'INSERT INTO users (login, password) VALUES (:login,:password)';
             $reponse = $bdd->prepare( $sql );
-            echo $reponse;
             $reponse->execute(array(':login'=>$login, ':password'=>$password));
             if (!$reponse){
                 echo "Erreur lors de l'enregistrement";
