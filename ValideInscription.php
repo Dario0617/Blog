@@ -29,12 +29,12 @@
             $_SESSION['login'] = $login;
             die;
         } else {
-            $sql = 'INSERT INTO users (login, password) VALUES (:login,:password)';
-            $reponse = $bdd->prepare( $sql );
+            $sql2 = 'INSERT INTO users (login, password) VALUES (:login,:password)';
+            $reponse2 = $bdd->prepare( $sql2 );
             $password = sodium_crypto_pwhash_str($password, SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE, 
             SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
-            $reponse->execute( [':login'=>$login, ':password'=>$password] );
-            if (!$reponse){
+            $reponse2->execute( [':login'=>$login, ':password'=>$password] );
+            if (!$reponse2){
                 echo "Erreur lors de l'enregistrement";
                 die;
             }
