@@ -31,10 +31,10 @@
         } else {
             $password = sodium_crypto_pwhash_str($password, SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE, 
             SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
-            echo $password;
             $sql = 'INSERT INTO users (login, password) VALUES (:login,:password)';
             $reponse = $bdd->prepare( $sql );
-            $reponse->execute( [':login'=>$login, ':password'=>$password] );
+            echo $reponse;
+            $reponse->execute(array(':login'=>$login, ':password'=>$password));
             if (!$reponse){
                 echo "Erreur lors de l'enregistrement";
                 die;
