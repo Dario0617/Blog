@@ -1,10 +1,11 @@
 <?php
     session_start();
-    echo $_POST['login'];
-    echo $_POST['password'];
+    echo (isset( $_POST['login'] ) && isset( $_POST['password'] ));
     if( isset( $_POST['login'] ) && isset( $_POST['password'] ) ) {
         $login = htmlentities($_POST['login'],ENT_COMPAT,"ISO-8859-1",true);
         $password = htmlentities($_POST['password'],ENT_COMPAT,"ISO-8859-1",true);
+        echo $login;
+        echo $password;
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
         } catch( Exception $e) {
