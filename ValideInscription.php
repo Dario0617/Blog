@@ -36,7 +36,7 @@
             $reponse->execute( [':login'=>$login, ':password'=>$password] );
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
-            $_SESSION['id'] = $bdd->lastInsertId();
+            //$_SESSION['id'] = $bdd->lastInsertId();
             header('Location:sendProfilePicture.php');
             die;
         }
