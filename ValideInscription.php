@@ -3,20 +3,16 @@
     if( isset( $_POST['login'] ) && isset( $_POST['password'] ) ) {
         $login = htmlentities($_POST['login'],ENT_COMPAT,"ISO-8859-1",true);
         $password = htmlentities($_POST['password'],ENT_COMPAT,"ISO-8859-1",true);
+        echo $password = sodium_crypto_pwhash_str($password, SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE, 
+        SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
-            echo $bdd;
-            echo strval($bdd);
         } catch( Exception $e) {
-            echo $e->getMessage();
             die( 'Erreur : ' . $e->getMessage() );
         }
         $sql = 'SELECT * FROM users WHERE login=:login';
-        echo $sql;
         $reponse = $bdd->prepare( $sql );
-        echo $reponse = $bdd->prepare( $sql );;
         $reponse->execute( [':login'=>$login] );
-        echo $reponse->fetch(PDO::FETCH_ASSOC);
         if( $acces = $reponse->fetch(PDO::FETCH_ASSOC) ) {
             header('Location:Inscription.php?error=1&loginerror=1');
             $_SESSION['login'] = $login;
