@@ -30,10 +30,13 @@
             die;
         } else {
             $sql2 = 'INSERT INTO users (login, password) VALUES (:login,:password)';
+            echo $sql2;
             $reponse2 = $bdd->prepare( $sql2 );
+            echo $reponse2;
             $password = sodium_crypto_pwhash_str($password, SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE, 
             SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
             $reponse2->execute( [':login'=>$login, ':password'=>$password] );
+            echo $reponse2;
             if (!$reponse2){
                 echo "Erreur lors de l'enregistrement";
                 die;
@@ -41,7 +44,7 @@
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
             $_SESSION['id'] = $bdd->lastInsertId();
-            header('Location:sendProfilePicture.php');
+            //header('Location:sendProfilePicture.php');
             die;
         }
     }
