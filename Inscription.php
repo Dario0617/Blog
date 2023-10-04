@@ -27,7 +27,7 @@ if( isset( $_GET['error'] ) ) {
     }
     if( isset( $_GET['confirmPasserror'] ) ) {
         $alert = 'alert-danger';
-        $mess = 'Erreur : Les deux mot de passe doit être identiques !';
+        $mess = 'Erreur : Les mots de passe doivent être identiques !';
         if( isset( $_SESSION['login'] ) ) {
             $login = $_SESSION['login'];
             session_destroy();

@@ -36,7 +36,7 @@
             $reponse->execute( [':login'=>$login, ':password'=>$password] );
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
-            $_SESSION['id'] = $pdo->lastInsertId();
+            //$_SESSION['id'] = $pdo->lastInsertId();
             header('Location:sendProfilePicture.php');
             die;
         }
