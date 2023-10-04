@@ -12,7 +12,7 @@
         $sql = 'SELECT * FROM users WHERE login=:login';
         $reponse = $bdd->prepare( $sql );
         $reponse->execute( [':login'=>$login] );
-
+        
         if( $acces = $reponse->fetch(PDO::FETCH_ASSOC) ) {
             header('Location:Inscription.php?error=1&loginerror=1');
             $_SESSION['login'] = $login;
