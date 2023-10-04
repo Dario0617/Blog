@@ -25,6 +25,14 @@ if( isset( $_GET['error'] ) ) {
             session_destroy();
         }
     }
+    if( isset( $_GET['confirmPasserror'] ) ) {
+        $alert = 'alert-danger';
+        $mess = 'Erreur : Les deux mot de passe doit être identiques !';
+        if( isset( $_SESSION['login'] ) ) {
+            $login = $_SESSION['login'];
+            session_destroy();
+        }
+    }
 }
 
 if (isset( $_SESSION['login'])){
@@ -96,6 +104,12 @@ if( isset( $_GET['validation'] ) ){
                         <label for="inputPassword" class="col-sm-2 col-form-label">Mot de passe</label>
                         <div class="col-sm-4">
                             <input type="password" class="form-control" id="inputPassword" name="password" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputConfirmPassword" class="col-sm-2 col-form-label">Confirmer mot de passe</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="inputConfirmPassword" name="confirmPassword" required>
                         </div>
                     </div>
 
