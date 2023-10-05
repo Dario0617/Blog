@@ -18,7 +18,7 @@ session_start();
 </header>
 <?php
 
-$id=$_GET['id'];
+$idBillet = $_GET['idBillet'];
 
 try {
     $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
@@ -27,12 +27,12 @@ try {
 }
 $sql = 'SELECT * FROM billets WHERE id=:id';
 $reponse = $bdd->prepare( $sql );
-$reponse->execute([':id' => $id]);
+$reponse->execute([':id' => $idBillet]);
 $tableBlog = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
 $sql = 'SELECT * FROM commentaires WHERE id_billet=:id';
 $reponse = $bdd->prepare( $sql );
-$reponse->execute([':id' => $id]);
+$reponse->execute([':id' => $idBillet]);
 $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -44,7 +44,7 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
             foreach($tableBlog as $key => $val){
             ?>
                 <div class="card">
-                    <h5 class="card-header">publié le <?=date("d/m/Y à H:i:s", strtotime($val['date_creation']))?></h5>
+                    <h5 class="card-header">Publié le <?=date("d/m/Y à H:i:s", strtotime($val['date_creation']))?></h5>
                     <div class="card-body">
                         <h5 class="card-title"><?=$val['titre']?></h5>
                         <p class="card-text"><?=$val['contenu']?></p>
@@ -64,7 +64,7 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
                 <h3>Commentaires</h3>
                 <?php
                     if( isset($_SESSION['connected']) ){
-                        echo '<button type="button" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal">Création d\'un commentaire</button>';
+                        echo '<button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal">Création d\'un commentaire</button>';
                     }
                 ?>
             </div>
@@ -89,19 +89,22 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
 <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Création d'un commentaire</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <textarea class="form-control" id="commentaryText" name="commentaryText" required></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary close" data-dismiss="modal">Fermer</button>
-        <button type="button" id="saveCommentary" class="btn btn-primary">Sauvegarder le commentaire</button>
-      </div>
+        <form name="accesform" method="post" action="saveCommentaire.php">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Création d'un commentaire</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" id="commentaryText" name="commentaryText" required></textarea>
+                <input type="hidden" id="idBillet" name="idBillet" value="<?=$idBillet?>">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-dismiss="modal">Fermer</button>
+                <button type="submit" id="saveCommentary" class="btn btn-primary">Sauvegarder le commentaire</button>
+            </div>
+        </form>
     </div>
   </div>
 </div>
@@ -119,36 +122,6 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
         elem2[1].onclick = function() {
             document.getElementById("exampleModal").style.display = 'none';
         };
-
-        const elem3 = document.getElementById("saveCommentary");
-        elem3.onclick = function(){
-            // Create the XMLHttpRequest object.
-            const xhr = new XMLHttpRequest();
-            // Initialize the request
-            xhr.open("POST", 'saveCommentaire.php', true);
-            // Set content type
-            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-            // Send the request with data to post
-
-            var auteur = "<?php echo strval($_SESSION['login']) ?>"
-            var text = document.getElementById("commentaryText").value
-            xhr.send(
-                JSON.stringify({
-                    text: text,
-                    idBillet: <?php echo $_GET['id']?>,
-                    auteur: auteur
-                })
-            );
-            xhr.onload = function(e) {
-                // Check if the request was a success
-                if (this.readyState === XMLHttpRequest.DONE && this.status === 201) {
-                    // Get and convert the responseText into JSON
-                    var response = JSON.parse(xhr.responseText);
-                    console.log(response);
-                    document.getElementById("exampleModal").style.display = 'none';	
-                }
-            }
-        }
 });
 </script>
 </body>

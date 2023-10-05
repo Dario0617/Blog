@@ -66,9 +66,9 @@
 
     <section class="container">
         <?php
-            echo '<div class="col-1" style="float:right">
+            echo '<div class="col-12" style="float:right;display: flex;flex-direction: row-reverse;">
             <form name="accesform" method="post" action="logout.php">
-            <button type="submit" class="btn btn-outline-danger">Déconnexion</button>
+            <button type="submit" class="btn btn-danger">Déconnexion</button>
             </form></div>';
         ?>
         <div class="row">

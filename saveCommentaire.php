@@ -1,11 +1,11 @@
 <?php
 	session_start();
 
-	$text = $_POST['text'];
+	$text = $_POST['commentaryText'];
 	$idBillet = $_POST['idBillet'];
-	$auteur = $_POST['auteur'];
+	$auteur = $_SESSION['login'];
 	$date = date("Y-m-d H:i:s");
-	
+
     if(isset ($text) && isset ($idBillet) && isset ($auteur)){
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
@@ -13,16 +13,15 @@
             die('Erreur :' . $e->getMessage());
         }
 
-        $text = htmlentities($_POST['text'],ENT_COMPAT,"ISO-8859-1",true);
+        $text = htmlentities($text,ENT_COMPAT,"ISO-8859-1",true);
 
         $sql = "INSERT INTO `commentaires` (`id_billet`, `auteur`, `commentaire`, `date_commentaire`) 
-			VALUES (:idBillet, :auteur, :text, :date)";
+			VALUES (:idBillet, :auteur, :commentaire, :date)";
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':idBillet'=>$idBillet, ':auteur'=>$auteur, 
-		':text'=>$text, ':date'=>$date]);
-		echo json_encode(array("statusCode"=>200));
-		echo $reponse;
-        // header('Location:commentaires.php');
-        //     die;
+		':commentaire'=>$text, ':date'=>$date]);
+
+        header('Location:commentaires.php?idBillet=' . $idBillet);
+        	die;
     }
 ?>

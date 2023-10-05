@@ -83,7 +83,7 @@ session_start();
                 $login . '</h4></div><div class="col-3" style="display: flex;justify-content: space-evenly;">
                 <a class="btn btn-outline-primary" href="createdTicket.php" style="margin-bottom: 20px;">Créer un billet</a>
                 <form name="accesform" method="post" action="logout.php">
-                <button type="submit" class="btn btn-outline-danger">Déconnexion</button>
+                <button type="submit" class="btn btn-danger">Déconnexion</button>
                 </form></div>';
             }
         ?>
@@ -93,11 +93,11 @@ session_start();
                 foreach($tableBlog as $key => $val){
                 ?>
                     <div class="card">
-                        <h5 class="card-header">publié le <?=date("d/m/Y à H:i:s", strtotime($val['date_creation']))?></h5>
+                        <h5 class="card-header">Publié le <?=date("d/m/Y à H:i:s", strtotime($val['date_creation']))?></h5>
                         <div class="card-body">
                             <h5 class="card-title"><?=$val['titre']?></h5>
                             <p class="card-text"><?=$val['contenu']?></p>
-                            <a href="commentaires.php?id=<?=$val['id']?>" class="btn btn-primary">Commentaires</a>
+                            <a href="commentaires.php?idBillet=<?=$val['id']?>" class="btn btn-primary">Commentaires</a>
                         </div>
                     </div>
                     <br>
