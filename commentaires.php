@@ -64,7 +64,7 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
                 <h3>Commentaires</h3>
                 <?php
                     if( isset($_SESSION['connected']) ){
-                        echo '<button type="button" class="btn btn-outline-primary btn-lg" id="createCommentaryModal">Open Small Modal</button>';
+                        echo '<button type="button" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal">Création d\'un commentaire</button>';
                     }
                 ?>
             </div>
@@ -86,21 +86,21 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </section>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Création d'un commentaire</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <textarea class="form-control" id="commentaryText" name="commentaryText" required></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary close" data-dismiss="modal">Fermer</button>
+        <button type="button" id="saveCommentary" class="btn btn-primary">Sauvegarder le commentaire</button>
       </div>
     </div>
   </div>
@@ -112,6 +112,43 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
             document.getElementById("exampleModal").style.display = 'block';
         };
 
+        const elem2 = document.getElementsByClassName("close");
+        elem2[0].onclick = function() {
+            document.getElementById("exampleModal").style.display = 'none';
+        };
+        elem2[1].onclick = function() {
+            document.getElementById("exampleModal").style.display = 'none';
+        };
+
+        const elem3 = document.getElementById("saveCommentary");
+        elem3.onclick = function(){
+            // Create the XMLHttpRequest object.
+            const xhr = new XMLHttpRequest();
+            // Initialize the request
+            xhr.open("POST", 'saveCommentaire.php', true);
+            // Set content type
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+            // Send the request with data to post
+
+            var auteur = "<?php echo strval($_SESSION['login']) ?>"
+            var text = document.getElementById("commentaryText").value
+            xhr.send(
+                JSON.stringify({
+                    text: text,
+                    idBillet: <?php echo $_GET['id']?>,
+                    auteur: auteur
+                })
+            );
+            xhr.onload = function(e) {
+                // Check if the request was a success
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 201) {
+                    // Get and convert the responseText into JSON
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    document.getElementById("exampleModal").style.display = 'none';	
+                }
+            }
+        }
 });
 </script>
 </body>
