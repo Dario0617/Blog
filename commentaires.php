@@ -36,7 +36,7 @@ $reponse->execute([':id' => $id]);
 $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
-
+<body>
 <section class="container mt-5">
     <div class="row">
         <div class="col-12">
@@ -60,9 +60,16 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
 <section class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <h3>Commentaires</h3>
-            <?php 
-            foreach($tableCommentaires as $key => $val){
+            <div class="row">
+                <h3>Commentaires</h3>
+                <?php
+                    if( isset($_SESSION['connected']) ){
+                        echo '<button type="button" class="btn btn-outline-primary btn-lg" id="createCommentaryModal">Open Small Modal</button>';
+                    }
+                ?>
+            </div>
+            <?php
+                foreach($tableCommentaires as $key => $val){
             ?>
             <div class="list-group">
                 <div class="list-group-item list-group-item-action">
@@ -78,3 +85,26 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </section>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">×</span>
+    <div id="modal-content"></div>
+  </div>
+</div>
+<script>
+$(document).ready(function() {
+  // Au clic sur le bouton, ouvrir le modal et charger le contenu de la page PHP
+  $("#createCommentaryModal").click(function() {
+    $("#myModal").show(); // Afficher le modal
+    //$("#modal-content").load("page.php"); // Charger le contenu de la page PHP dans la div du modal
+  });
+
+  // Au clic sur le bouton de fermeture, cacher le modal
+  $(".close").click(function() {
+    $("#myModal").hide(); // Cacher le modal
+  });
+});
+</script>
+</body>
+</html>
