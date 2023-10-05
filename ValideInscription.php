@@ -16,7 +16,7 @@
                 die;
         }
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
+            $bdd = new PDO('mysql:host=localhost:3306;dbname=dario;charset=utf8', 'dario', 'dab3oeP-');
         } catch( Exception $e) {
             die( 'Erreur : ' . $e->getMessage() );
         }
