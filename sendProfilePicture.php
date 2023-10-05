@@ -7,6 +7,7 @@
 <head>
     <meta charset="ISO-8859"/>
     <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="https://kit.fontawesome.com/d576863e16.js" crossorigin="anonymous"></script>
     <title> Photo de profil </title>
 </head>
 

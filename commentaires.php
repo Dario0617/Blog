@@ -6,6 +6,7 @@ session_start();
     <title></title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="https://kit.fontawesome.com/d576863e16.js" crossorigin="anonymous"></script>
 </head>
 <header>
     <section class="container mt-5">
@@ -71,13 +72,16 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
             <?php
                 foreach($tableCommentaires as $key => $val){
             ?>
-            <div class="list-group">
+            <div class="list-group col-12">
                 <div class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1"><?=$val['auteur']?></h5>
                         <small><?=$val['auteur']?> le <?=date("d/m/Y à H:i:s", strtotime($val['date_commentaire']))?></small>
                     </div>
-                    <p class="mb-1"><?=$val['commentaire']?></p>
+                    <div class="d-flex align-items-center row">
+                        <p class="mb-1 col-11"><?=$val['commentaire']?></p>
+                        <button type="submit" class="btn btn-danger col-1"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
             </div>
             <?php
                 }

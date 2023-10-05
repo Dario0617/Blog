@@ -6,6 +6,7 @@ session_start();
     <title></title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="https://kit.fontawesome.com/d576863e16.js" crossorigin="anonymous"></script>
     <title> Création d'un billet </title>
 </head>
 
@@ -27,13 +28,7 @@ if (isset( $_SESSION['login'])){
                     <h4>Bienvenue <?php echo $login?></h4>
                 </div>
                 <div class="col-3" style="display: flex;justify-content: space-evenly;">
-                    <a class="btn btn-outline-primary" href="index.php">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg>
-                        Accueil
-                    </a>
+                    <a class="btn btn-outline-primary" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     <a class="btn btn-outline-danger" href="connexion.php">Déconnexion</a>
                 </div>
             </div>

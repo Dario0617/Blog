@@ -2,6 +2,7 @@
 <head>
     <meta charset="ISO-8859"/>
     <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="https://kit.fontawesome.com/d576863e16.js" crossorigin="anonymous"></script>
     <title> Connexion </title>
 </head>
 
@@ -31,30 +32,13 @@ if (isset( $_SESSION['login'])){
             <div class="col-4">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-                            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-                            </svg>
-                            Accueil
-                        </a>
+                        <a class="nav-link" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="connexion.php">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                            </svg>
-                        Connexion
-                        </a>
+                        <a class="nav-link active" aria-current="page" href="connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Inscription.php">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                            </svg>
-                        Inscription</a>
+                        <a class="nav-link" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>
                     </li>
                 </ul>
             </div>
