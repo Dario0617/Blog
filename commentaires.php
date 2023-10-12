@@ -63,11 +63,7 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
         <div class="col-12">
             <div class="row">
                 <h3>Commentaires</h3>
-                <?php
-                    if( isset($_SESSION['connected']) ){
-                        echo '<button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal">Création d\'un commentaire</button>';
-                    }
-                ?>
+               <button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d'un commentaire</button>;
             </div>
             <?php
                 foreach($tableCommentaires as $key => $val){
@@ -80,7 +76,7 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <div class="d-flex align-items-center row">
                         <p class="mb-1 col-11"><?=$val['commentaire']?></p>
-                        <button type="submit" class="btn btn-danger col-1"><i class="fa-regular fa-trash-can"></i></button>
+                        <button type="submit" class="btn btn-danger col-1"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
             </div>
             <?php
@@ -95,7 +91,7 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
     <div class="modal-content">
         <form name="accesform" method="post" action="saveCommentaire.php">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Création d'un commentaire</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d'un commentaire</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

@@ -48,7 +48,7 @@ session_start();
                         <a class="nav-link" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>
                     </li>
                     <?php if( isset( $_SESSION['connected'] ) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>Profile</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Profile</a></li>";
                     } ?>
                 </ul>
             </div>
@@ -60,9 +60,9 @@ session_start();
             if( isset( $_SESSION['connected'] ) ){
                 echo '<div class="row" style="margin-bottom: 10px"><div class="col-9"><h4>Bienvenue ' . 
                 $login . '</h4></div><div class="col-3" style="display: flex;justify-content: space-evenly;">
-                <a class="btn btn-outline-primary" href="createdTicket.php" style="margin-bottom: 20px;">Créer un billet</a>
+                <a class="btn btn-outline-primary" href="createdTicket.php" style="margin-bottom: 20px;"><i class="fa-solid fa-ticket"></i>&nbsp;Créer un billet</a>
                 <form name="accesform" method="post" action="logout.php">
-                <button type="submit" class="btn btn-danger">Déconnexion</button>
+                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-door-open"></i>&nbsp;Déconnexion</button>
                 </form></div>';
             }
         ?>
