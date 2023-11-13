@@ -9,13 +9,31 @@ session_start();
     <script src="https://kit.fontawesome.com/d576863e16.js" crossorigin="anonymous"></script>
 </head>
 <header>
-    <section class="container mt-5">
-        <div class="row">
-            <div class="col-4">
-                <a href="index.php" class="btn btn-primary">Liste des tickets</a>
-            </div>
+    <div class="row" style="margin-top: 20px; margin-bottom: 20px; padding-left: 20px; padding-right:20px;">
+        <div class="col-12" style="padding-left: 5%;">
+            <ul class="nav nav-tabs justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profil</a>
+                </li>
+                <?php
+                if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                    echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
+                }
+                if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                    echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
+                }
+                if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
+                    echo "<li class='nav-item'><a class='nav-link' href='createdTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
+                }?>
+                <li class='nav-item'>
+                    <a class='nav-link' style='color:red' href='logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a>
+                </li>
+            </ul>
         </div>
-    </section>
+    </div>
 </header>
 <?php
 
@@ -63,7 +81,7 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
         <div class="col-12">
             <div class="row">
                 <h3>Commentaires</h3>
-               <button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d'un commentaire</button>;
+               <button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d'un commentaire</button>
             </div>
             <?php
                 foreach($tableCommentaires as $key => $val){

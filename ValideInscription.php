@@ -34,7 +34,7 @@
             $roleUser = 1;
             $sql = 'INSERT INTO users (login, password, roleId) VALUES (:login,:password, :roleId)';
             $reponse = $bdd->prepare( $sql );
-            $reponse->execute(array(':login'=>$login, ':password'=>$password, ':roleId'=>Role::Role_User));
+            $reponse->execute(array(':login'=>$login, ':password'=>$password, ':roleId'=>$roleUser));
             if (!$reponse){
                 echo "Erreur lors de l'enregistrement";
                 die;

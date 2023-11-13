@@ -19,17 +19,34 @@ if (isset( $_SESSION['login'])){
 ?>
 <body>
     <header>
-        <div class="row" style="margin-top: 20px; padding-left: 20px; padding-right:20px;">
-            <div class="col-8">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px; padding-left: 20px; padding-right:20px;">
+            <div class="col-3">
                 <h1>Création d'un billet</h1>
             </div>
+            <div class="col-9">
+                <ul class="nav nav-tabs justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                    </li>
+                    <?php if( isset( $_SESSION['connected'] ) ){
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Profil</a></li>";
+                    } 
+                    if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                        echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
+                    }
+                    if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
+                    }
+                    if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
+                        echo "<li class='nav-item'><a class='nav-link active' href='createdTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
+                    }if( isset( $_SESSION['connected'] ) ){
+                        echo "<li class='nav-item'><a class='nav-link' style='color:red' href='logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a></li>";
+                    } ?>
+                </ul>
+            </div>
             <div class="row" style="margin-bottom: 10px">
-                <div class="col-9">
+                <div class="col-12">
                     <h4>Bienvenue <?php echo $login?></h4>
-                </div>
-                <div class="col-3" style="display: flex;justify-content: space-evenly;">
-                    <a class="btn btn-outline-primary" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
-                    <a class="btn btn-outline-danger" href="connexion.php">Déconnexion</a>
                 </div>
             </div>
         </div>

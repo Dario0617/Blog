@@ -16,12 +16,28 @@
         $users = $reponse->fetchAll(pdo::FETCH_ASSOC);
 
     }
-    $_SESSION['connected'] = true;
+
+    $mess = '';
+    $login = '';
+    if( isset( $_GET['error'] ) ) {
+        if( isset( $_GET['passerror'] ) ) {
+            $alert = 'alert-danger';
+            $mess = 'Erreur : Le mot de passe doit contenir au minimum 8 caractères !';
+        }
+        if( isset( $_GET['confirmPasserror'] ) ) {
+            $alert = 'alert-danger';
+            $mess = 'Erreur : Les mots de passe doivent être identiques !';
+        }
+    }
+    if( isset( $_GET['validation'] ) ){
+        $alert = 'alert-success';
+        $mess = 'Mot de passe changé avec succès';
+    }
 ?>
 
 <html lang="fr">
 <head>
-    <title>Gestion des utilisateurs?</title>
+    <title>Gestion des utilisateurs</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.css" />
     <script src="https://kit.fontawesome.com/d576863e16.js" crossorigin="anonymous"></script>
@@ -29,53 +45,61 @@
 
 <body>
     <header>
-        <div class="row" style="margin-top: 20px; padding-left: 20px; padding-right:20px;">
-            <div class="col-4">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px; padding-left: 20px; padding-right:20px;">
+            <div class="col-3" style="display: contents">
                 <h1>Liste des utilisateurs</h1>
             </div>
-            <div class="col-8">
+            <div class="col-9" style="padding-left: 5%;">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     </li>
                     <li class='nav-item'>
-                        <a class='nav-link' href='profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profile</a>
+                        <a class='nav-link' href='profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profil</a>
                     </li>
                     <?php
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                        echo "<li class='nav-item'><a class='nav-link active' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Gestion des utilisateurs</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link active' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
                     }
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Modération des commentaires</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
                     }
                     if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
                         echo "<li class='nav-item'><a class='nav-link' href='createdTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
-                    } ?>
+                    }?>
+                    <li class='nav-item'>
+                        <a class='nav-link' style='color:red' href='logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </header>
 
     <section class="container">
+        <?php
+            if( isset( $_GET['error'] ) || isset( $_GET['validation'] )) {
+                echo '<div class="row"><p class="col-10 alert '.$alert.'">' . $mess .'</p></div>';
+            }
+        ?>
         <div class="row">
             <div class="col-12">
             <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+                table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                }
 
-    th, td {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
+                th, td {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+                }
 
-    th {
-      background-color: #f2f2f2;
-    }
-  </style>
+                th {
+                background-color: #f2f2f2;
+                }
+            </style>
                 <table>
                     <thead>
                     <tr>
@@ -102,7 +126,7 @@
                             </td>
                             <td><?=$user['login']?></td>
                             <td>
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" data-userId=<?=$user['id']?> id="changePassword"><i class="fa-solid fa-pen"></i>&nbsp;Modification du mot de passe</button>
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" data-userId=<?=$user['id']?> name="changePassword" id="changePassword<?=$user['id']?>"><i class="fa-solid fa-pen"></i>&nbsp;Modification du mot de passe</button>
                             </td>
                         </tr>
                 <?php
@@ -141,11 +165,13 @@
 </div>
 <script>
     window.addEventListener('DOMContentLoaded', function() {
-        const elem = document.getElementById("changePassword");
-        elem.onclick = function() {
-            document.getElementById("exampleModal").style.display = 'block';
-            document.getElementById("userId").value = elem.dataset.userid;
-        };
+        const elems = document.getElementsByName("changePassword");
+        elems.forEach((element) => {
+            element.onclick = function() {
+                document.getElementById("exampleModal").style.display = 'block';
+                document.getElementById("userId").value = element.dataset.userid;
+            };
+        });
 
         const elem2 = document.getElementsByClassName("close");
         elem2[0].onclick = function() {

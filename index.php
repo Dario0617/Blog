@@ -39,7 +39,7 @@ session_start();
 
 <body>
     <header>
-        <div class="row" style="margin-top: 20px; padding-left: 20px; padding-right:20px;">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px; padding-left: 20px; padding-right:20px;">
             <div class="col-3">
                 <h1>Mon blog</h1>
             </div>
@@ -58,13 +58,15 @@ session_start();
                         echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Profil</a></li>";
                     } 
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Gestion des utilisateurs</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
                     }
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Modération des commentaires</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
                     }
                     if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
                         echo "<li class='nav-item'><a class='nav-link' href='createdTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
+                    }if( isset( $_SESSION['connected'] ) ){
+                        echo "<li class='nav-item'><a class='nav-link' style='color:red' href='logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a></li>";
                     } ?>
                 </ul>
             </div>
@@ -72,15 +74,6 @@ session_start();
     </header>
 
     <section class="container">
-        <?php
-            if( isset( $_SESSION['connected'] ) ){
-                echo '<div class="row" style="margin-bottom: 10px"><div class="col-9"><h4>Bienvenue ' . 
-                $login . '</h4></div><div class="col-3" style="display: flex;justify-content: space-evenly;">
-                <form name="accesform" method="post" action="logout.php">
-                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-door-open"></i>&nbsp;Déconnexion</button>
-                </form></div>';
-            }
-        ?>
         <div class="row">
             <div class="col-12">
                 <?php 
