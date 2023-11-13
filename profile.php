@@ -37,10 +37,10 @@
 <body>
     <header>
         <div class="row" style="margin-top: 20px; padding-left: 20px; padding-right:20px;">
-            <div class="col-8">
+            <div class="col-3">
                 <h1>Mon profile</h1>
             </div>
-            <div class="col-4">
+            <div class="col-9">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
@@ -48,6 +48,16 @@
                     <li class='nav-item'>
                         <a class='nav-link active' href='profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profile</a>
                     </li>
+                    <?php
+                    if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Gestion des utilisateurs</a></li>";
+                    }
+                    if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Modération des commentaires</a></li>";
+                    }
+                    if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
+                        echo "<li class='nav-item'><a class='nav-link' href='createdTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
+                    } ?>
                 </ul>
             </div>
         </div>
