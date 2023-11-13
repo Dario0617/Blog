@@ -22,6 +22,13 @@ session_start();
 
     $style = "";
     if( isset( $_SESSION['connected'] ) ){
+        if ( isset( $_SESSION['id'] ) ){
+            $sql = 'SELECT roleId FROM users WHERE id = :id';
+            $reponse = $bdd->prepare( $sql );
+            $reponse->execute(array(':id'=>$_SESSION['id']));
+            $role = $reponse->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['role'] = $role["roleId"];
+        }
         $style = "style='display:none'";
     }
     $login= "";
@@ -33,10 +40,10 @@ session_start();
 <body>
     <header>
         <div class="row" style="margin-top: 20px; padding-left: 20px; padding-right:20px;">
-            <div class="col-8">
+            <div class="col-3">
                 <h1>Mon blog</h1>
             </div>
-            <div class="col-4">
+            <div class="col-9">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
@@ -48,7 +55,16 @@ session_start();
                         <a class="nav-link" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>
                     </li>
                     <?php if( isset( $_SESSION['connected'] ) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Profile</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Profil</a></li>";
+                    } 
+                    if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Gestion des utilisateurs</a></li>";
+                    }
+                    if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Modération des commentaires</a></li>";
+                    }
+                    if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
+                        echo "<li class='nav-item'><a class='nav-link' href='createdTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
                     } ?>
                 </ul>
             </div>
@@ -60,7 +76,6 @@ session_start();
             if( isset( $_SESSION['connected'] ) ){
                 echo '<div class="row" style="margin-bottom: 10px"><div class="col-9"><h4>Bienvenue ' . 
                 $login . '</h4></div><div class="col-3" style="display: flex;justify-content: space-evenly;">
-                <a class="btn btn-outline-primary" href="createdTicket.php" style="margin-bottom: 20px;"><i class="fa-solid fa-ticket"></i>&nbsp;Créer un billet</a>
                 <form name="accesform" method="post" action="logout.php">
                 <button type="submit" class="btn btn-danger"><i class="fa-solid fa-door-open"></i>&nbsp;Déconnexion</button>
                 </form></div>';
