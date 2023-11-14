@@ -44,7 +44,7 @@
                             $sql = 'UPDATE users SET image=:nameFile WHERE id=:id';
                             $reponse = $bdd->prepare($sql);
                             $reponse->execute([':id'=>$id, ':nameFile'=>$nameFile]);
-                            header('Location:profile.php');
+                            header('Location:Profile.php');
                             die;
                         }
                         else

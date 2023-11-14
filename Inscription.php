@@ -16,7 +16,7 @@ $login = '';
 if( isset( $_GET['error'] ) ) {
     if( isset( $_GET['loginerror'] ) ) {
         $alert = 'alert-danger';
-        $mess = 'Erreur : Ce login existe déjà ! </br> Veuillez vous connectez <a href="connexion.php" class="link-danger">Connexion</a>';
+        $mess = 'Erreur : Ce login existe déjà ! </br> Veuillez vous connectez <a href="Connexion.php" class="link-danger">Connexion</a>';
     }
     if( isset( $_GET['passerror'] ) ) {
         $alert = 'alert-danger';
@@ -55,10 +55,10 @@ if( isset( $_GET['validation'] ) ){
             <div class="col-4">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                        <a class="nav-link" href="Index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
+                        <a class="nav-link" href="Connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>
@@ -99,7 +99,7 @@ if( isset( $_GET['validation'] ) ){
 
                     <div class="mb-3 row ">
                             <div class="col-sm-8">
-                                <a href="connexion.php" class="link-info">J'ai déjà un compte</a>
+                                <a href="Connexion.php" class="link-info">J'ai déjà un compte</a>
                             </div>
                             <div class="col-sm-4 justify-content-end">
                                 <button type="submit" class="btn btn-primary mb-3">Inscription</button>

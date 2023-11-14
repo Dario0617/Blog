@@ -42,7 +42,7 @@
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
             $_SESSION['id'] = $bdd->lastInsertId();
-            header('Location:sendProfilePicture.php');
+            header('Location:SendProfilePicture.php');
             die;
         }
     }

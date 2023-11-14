@@ -23,7 +23,7 @@
     <section class="container">
         <div class="row">
             <div class="col-12">
-                <form name="sendProfilePicture" method="post" enctype="multipart/form-data" action="receptProfilePicture.php">
+                <form name="sendProfilePicture" method="post" enctype="multipart/form-data" action="ReceptProfilePicture.php">
                 <div class="input-group">
                         <input type="file" class="form-control" id="inputGroupFile04" 
                         aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="myfile">
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a class="nav-link" aria-current="page" href="index.php">Ignorer photo de profil</a>
+                <a class="nav-link" aria-current="page" href="Index.php">Ignorer photo de profil</a>
             </div>
         </div>
     </section>

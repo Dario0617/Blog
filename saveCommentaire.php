@@ -20,8 +20,7 @@
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':idBillet'=>$idBillet, ':auteur'=>$auteur, 
 		':commentaire'=>$text, ':date'=>$date]);
-
-        header('Location:commentaires.php?idBillet=' . $idBillet);
-        	die;
     }
+    header('Location:Commentaires.php?idBillet=' . $idBillet);
+        	die;
 ?>

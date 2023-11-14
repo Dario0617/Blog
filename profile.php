@@ -43,23 +43,23 @@
             <div class="col-9">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                        <a class="nav-link" aria-current="page" href="Index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     </li>
                     <li class='nav-item'>
-                        <a class='nav-link active' href='profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profil</a>
+                        <a class='nav-link active' href='Profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profil</a>
                     </li>
                     <?php
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
                         echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
                     }
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
                     }
                     if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
-                        echo "<li class='nav-item'><a class='nav-link' href='createdTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='CreatedTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
                     }?>
                     <li class='nav-item'>
-                        <a class='nav-link' style='color:red' href='logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a>
+                        <a class='nav-link' style='color:red' href='Logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a>
                     </li>
                 </ul>
             </div>
@@ -77,7 +77,7 @@
                             echo '<img src="images/' . $profilePicture . '" style="height: 100px;"/>';
                         }
                         else{
-                            echo '<p>Pas de photo de profil, <a aria-current="page" href="sendProfilePicture.php">Mettre une photo de profile</a></p>';
+                            echo '<p>Pas de photo de profil, <a aria-current="page" href="SendProfilePicture.php">Mettre une photo de profile</a></p>';
                         }
                         ?>
                     </div>

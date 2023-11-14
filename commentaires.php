@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+$style = "";
+    if( isset( $_SESSION['connected'] ) ){
+        $style = "style='display:none'";
+    }
 ?>
 <html lang="fr">
 <head>
@@ -13,24 +18,28 @@ session_start();
         <div class="col-12" style="padding-left: 5%;">
             <ul class="nav nav-tabs justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                    <a class="nav-link active" aria-current="page" href="Index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                 </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profil</a>
+                <li class="nav-item" <?php echo $style;?>>
+                    <a class="nav-link" href="Connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
                 </li>
-                <?php
+                <li class="nav-item" <?php echo $style;?>>
+                    <a class="nav-link" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>
+                </li>
+                <?php if( isset( $_SESSION['connected'] ) ){
+                    echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Profil</a></li>";
+                } 
                 if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
                     echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
                 }
                 if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                    echo "<li class='nav-item'><a class='nav-link' href='profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
                 }
                 if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
-                    echo "<li class='nav-item'><a class='nav-link' href='createdTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
-                }?>
-                <li class='nav-item'>
-                    <a class='nav-link' style='color:red' href='logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a>
-                </li>
+                    echo "<li class='nav-item'><a class='nav-link' href='CreatedTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
+                }if( isset( $_SESSION['connected'] ) ){
+                    echo "<li class='nav-item'><a class='nav-link' style='color:red' href='Logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a></li>";
+                } ?>
             </ul>
         </div>
     </div>
@@ -81,7 +90,9 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
         <div class="col-12">
             <div class="row">
                 <h3>Commentaires</h3>
-               <button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d'un commentaire</button>
+                <?php if( isset( $_SESSION['connected'] ) ){
+                    echo '<button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d\'un commentaire</button>';
+                } ?>
             </div>
             <?php
                 foreach($tableCommentaires as $key => $val){
@@ -94,7 +105,9 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <div class="d-flex align-items-center row">
                         <p class="mb-1 col-11"><?=$val['commentaire']?></p>
-                        <button type="submit" class="btn btn-danger col-1"><i class="fa-solid fa-trash-can"></i></button>
+                        <?php if( isset( $_SESSION['connected'] ) && $val['auteur'] == $_SESSION['login'] ){
+                            echo '<button type="submit" class="btn btn-danger col-1"><i class="fa-solid fa-trash-can"></i></button>';
+                        } ?>
                     </div>
             </div>
             <?php
@@ -107,7 +120,7 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
 <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <form name="accesform" method="post" action="saveCommentaire.php">
+        <form name="accesform" method="post" action="SaveCommentaire.php">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d'un commentaire</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

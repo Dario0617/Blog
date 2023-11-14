@@ -32,10 +32,10 @@ if (isset( $_SESSION['login'])){
             <div class="col-4">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                        <a class="nav-link" href="Index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
+                        <a class="nav-link active" aria-current="page" href="Connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>

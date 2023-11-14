@@ -16,21 +16,21 @@
 
         if ($valeurs = $reponse->fetch(pdo::FETCH_ASSOC)){
             if (sodium_crypto_pwhash_str_verify($valeurs['password'], $password)){
-                header('Location:index.php');
+                header('Location:Index.php');
                 $_SESSION['login'] = $login;
                 $_SESSION['connected'] = true;
                 $_SESSION['id'] = $valeurs['id'];
                 die;
             }
             else{
-                header('Location:connexion.php?error=1&passerror=1');
+                header('Location:Connexion.php?error=1&passerror=1');
                 $_SESSION['login'] = $login;
                 die;
             }
         }
         else
         {
-            header('Location:connexion.php?error=1&loginerror=1');
+            header('Location:Connexion.php?error=1&loginerror=1');
             $_SESSION['login'] = $login;
             die;
         }
