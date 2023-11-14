@@ -52,7 +52,7 @@
             <div class="col-9" style="padding-left: 5%;">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="Index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                        <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     </li>
                     <li class='nav-item'>
                         <a class='nav-link' href='Profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profil</a>
@@ -102,17 +102,17 @@
             </style>
                 <table>
                     <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Role</th>
-                        <th>Login</th>
-                        <th>#</th>
-                    </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Role</th>
+                            <th>Login</th>
+                            <th>#</th>
+                        </tr>
                     </thead>
                     <tbody>
-                <?php 
-                foreach($users as $key => $user){
-                ?>
+                    <?php 
+                    foreach($users as $key => $user){
+                    ?>
                         <tr>
                             <td><?=$user['id']?></td>
                             <td><?php if ($user['roleId'] == 1) {
@@ -126,12 +126,24 @@
                             </td>
                             <td><?=$user['login']?></td>
                             <td>
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" data-userId=<?=$user['id']?> name="changePassword" id="changePassword<?=$user['id']?>"><i class="fa-solid fa-pen"></i>&nbsp;Modification du mot de passe</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-userId=<?=$user['id']?> name="changePassword" id="changePassword<?=$user['id']?>"><i class="fa-solid fa-key"></i></i>&nbsp;Modification du mot de passe</button>
+                                <?php 
+                                if ($user['roleId'] != 2) : ?>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['id']?> name="changeToAdmin" id="changeToAdmin<?=$user['id']?>"><i class="fa-solid fa-user-shield"></i></i></i>&nbsp;Passer au rôle "Admin"</button>
+                                <?php endif;
+                                if ($user['roleId'] != 1) : ?>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['id']?> name="changeToUser" id="changeToUser<?=$user['id']?>"><i class="fa-solid fa-user"></i></i>&nbsp;Passer au rôle "Utilisateur"</button>
+                                <?php endif;
+                                if ($user['roleId'] != 3) : ?>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['id']?> name="changeToEditor" id="changetoEditor<?=$user['id']?>"><i class="fa-solid fa-user-pen"></i></i>&nbsp;Passer au rôle "Editeur"</button>
+                                <?php 
+                                endif;
+                                ?>
                             </td>
                         </tr>
-                <?php
-                    }
-                ?>
+                    <?php
+                        }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -180,6 +192,85 @@
         elem2[1].onclick = function() {
             document.getElementById("exampleModal").style.display = 'none';
         };
+
+        const buttonsChangeToAdmin = document.getElementsByName("changeToAdmin");
+        buttonsChangeToAdmin.forEach((button) => {
+            button.onclick = function() {
+                var xhr = new XMLHttpRequest();
+                // Spécifiez le type de requête (GET ou POST), l'URL du script PHP, et indiquez s'il s'agit d'une requête asynchrone.
+                xhr.open("POST", "ChangeRole.php", true);
+
+                // Définissez l'en-tête de la requête pour indiquer que vous envoyez des données au format formulaire.
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                // Définissez la fonction de rappel à appeler lorsque la requête est terminée.
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // La réponse du serveur est disponible dans xhr.responseText.
+                        //console.log(xhr.responseText);
+                    }
+                };
+                // Créez une chaîne de requête en formatant vos données.
+                var params = "roleId=2&userId="+button.dataset.userid;
+               
+                // Envoyez la requête avec les données.
+                xhr.send(params);   
+                
+                location.reload();
+            };
+        });
+        const buttonsChangeToUser = document.getElementsByName("changeToUser");
+        buttonsChangeToUser.forEach((button) => {
+            button.onclick = function() {
+                var xhr = new XMLHttpRequest();
+                // Spécifiez le type de requête (GET ou POST), l'URL du script PHP, et indiquez s'il s'agit d'une requête asynchrone.
+                xhr.open("POST", "ChangeRole.php", true);
+
+                // Définissez l'en-tête de la requête pour indiquer que vous envoyez des données au format formulaire.
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                // Définissez la fonction de rappel à appeler lorsque la requête est terminée.
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // La réponse du serveur est disponible dans xhr.responseText.
+                        //console.log(xhr.responseText);
+                    }
+                };
+                // Créez une chaîne de requête en formatant vos données.
+                var params = "roleId=1&userId="+button.dataset.userid;
+                
+                // Envoyez la requête avec les données.
+                xhr.send(params);
+
+                location.reload();
+            };
+        });
+        const buttonsChangeToEditor = document.getElementsByName("changeToEditor");
+        buttonsChangeToEditor.forEach((button) => {
+            button.onclick = function() {
+                var xhr = new XMLHttpRequest();
+                // Spécifiez le type de requête (GET ou POST), l'URL du script PHP, et indiquez s'il s'agit d'une requête asynchrone.
+                xhr.open("POST", "ChangeRole.php", true);
+
+                // Définissez l'en-tête de la requête pour indiquer que vous envoyez des données au format formulaire.
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                // Définissez la fonction de rappel à appeler lorsque la requête est terminée.
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // La réponse du serveur est disponible dans xhr.responseText.
+                        //console.log(xhr.responseText);
+                    }
+                };
+                // Créez une chaîne de requête en formatant vos données.
+                var params = "roleId=3&userId="+button.dataset.userid;
+                
+                // Envoyez la requête avec les données.
+                xhr.send(params);
+
+                location.reload();
+            };
+        });
 });
 </script>
 

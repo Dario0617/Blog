@@ -18,7 +18,7 @@ $style = "";
         <div class="col-12" style="padding-left: 5%;">
             <ul class="nav nav-tabs justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="Index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                    <a class="nav-link active" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                 </li>
                 <li class="nav-item" <?php echo $style;?>>
                     <a class="nav-link" href="Connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>

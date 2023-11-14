@@ -12,7 +12,7 @@
             $sql = 'INSERT INTO billets (titre, contenu, date_creation) VALUES (:titre,:contenu,:date)';
             $reponse = $bdd->prepare( $sql );
             $reponse->execute( [':titre'=>$titre, ':contenu'=>$contenu, ':date'=>$date] );
-            header('Location:Index.php');
+            header('Location:index.php');
             die;
     }
 ?>

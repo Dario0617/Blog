@@ -43,7 +43,7 @@
             <div class="col-9">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="Index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                        <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     </li>
                     <li class='nav-item'>
                         <a class='nav-link active' href='Profile.php'><i class="fa-solid fa-circle-user"></i>&nbsp;Profil</a>

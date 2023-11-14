@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a class="nav-link" aria-current="page" href="Index.php">Ignorer photo de profil</a>
+                <a class="nav-link" aria-current="page" href="index.php">Ignorer photo de profil</a>
             </div>
         </div>
     </section>

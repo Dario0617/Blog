@@ -16,7 +16,7 @@
 
         if ($valeurs = $reponse->fetch(pdo::FETCH_ASSOC)){
             if (sodium_crypto_pwhash_str_verify($valeurs['password'], $password)){
-                header('Location:Index.php');
+                header('Location:index.php');
                 $_SESSION['login'] = $login;
                 $_SESSION['connected'] = true;
                 $_SESSION['id'] = $valeurs['id'];
