@@ -39,7 +39,7 @@ session_start();
 
 <body>
     <header>
-        <div class="row" style="margin-top: 20px; margin-bottom: 20px; padding-left: 20px; padding-right:20px;">
+        <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 0%; margin-right: 0%; padding-left: 1%; padding-right: 1%;">
             <div class="col-3">
                 <h1>Mon blog</h1>
             </div>
@@ -48,10 +48,10 @@ session_start();
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
                     </li>
-                    <li class="nav-item" <?php echo $style;?>>
+                    <li class="nav-item" <?=$style?>>
                         <a class="nav-link" href="Connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
                     </li>
-                    <li class="nav-item" <?php echo $style;?>>
+                    <li class="nav-item" <?=$style?>>
                         <a class="nav-link" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>
                     </li>
                     <?php if( isset( $_SESSION['connected'] ) ){
@@ -61,7 +61,7 @@ session_start();
                         echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
                     }
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='CommentManagement.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
                     }
                     if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
                         echo "<li class='nav-item'><a class='nav-link' href='CreatedTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";

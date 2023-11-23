@@ -18,7 +18,6 @@
     }
 
     $mess = '';
-    $login = '';
     if( isset( $_GET['error'] ) ) {
         if( isset( $_GET['passerror'] ) ) {
             $alert = 'alert-danger';
@@ -45,7 +44,7 @@
 
 <body>
     <header>
-        <div class="row" style="margin-top: 20px; margin-bottom: 20px; padding-left: 20px; padding-right:20px;">
+        <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 0%; margin-right: 0%; padding-left: 1%; padding-right: 1%;">
             <div class="col-3" style="display: contents">
                 <h1>Liste des utilisateurs</h1>
             </div>
@@ -62,7 +61,7 @@
                         echo "<li class='nav-item'><a class='nav-link active' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
                     }
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='CommentManagement.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
                     }
                     if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
                         echo "<li class='nav-item'><a class='nav-link' href='CreatedTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
@@ -83,30 +82,13 @@
         ?>
         <div class="row">
             <div class="col-12">
-            <style>
-                table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 20px;
-                }
-
-                th, td {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-                }
-
-                th {
-                background-color: #f2f2f2;
-                }
-            </style>
-                <table>
-                    <thead>
+                <table class="table table-bordered">
+                    <thead class="table-secondary">
                         <tr>
-                            <th>ID</th>
-                            <th>Role</th>
-                            <th>Login</th>
-                            <th>#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Login</th>
+                            <th scope="col">#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,7 +96,7 @@
                     foreach($users as $key => $user){
                     ?>
                         <tr>
-                            <td><?=$user['id']?></td>
+                            <th scope="row"><?=$user['id']?></td>
                             <td><?php if ($user['roleId'] == 1) {
                                 echo 'Utilisateur';
                             } else if ($user['roleId'] == 2) {
@@ -204,10 +186,13 @@
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
                 // Définissez la fonction de rappel à appeler lorsque la requête est terminée.
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        // La réponse du serveur est disponible dans xhr.responseText.
-                        //console.log(xhr.responseText);
+                xhr.onload = function () {
+                    // Assuming the PHP script sets a header for redirection
+                    var redirectUrl = xhr.responseURL;
+
+                    if (redirectUrl) {
+                        // Redirect the user to the new page
+                        window.location.href = redirectUrl;
                     }
                 };
                 // Créez une chaîne de requête en formatant vos données.
@@ -230,10 +215,13 @@
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
                 // Définissez la fonction de rappel à appeler lorsque la requête est terminée.
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        // La réponse du serveur est disponible dans xhr.responseText.
-                        //console.log(xhr.responseText);
+                xhr.onload = function () {
+                    // Assuming the PHP script sets a header for redirection
+                    var redirectUrl = xhr.responseURL;
+
+                    if (redirectUrl) {
+                        // Redirect the user to the new page
+                        window.location.href = redirectUrl;
                     }
                 };
                 // Créez une chaîne de requête en formatant vos données.
@@ -256,10 +244,13 @@
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
                 // Définissez la fonction de rappel à appeler lorsque la requête est terminée.
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        // La réponse du serveur est disponible dans xhr.responseText.
-                        //console.log(xhr.responseText);
+                xhr.onload = function () {
+                    // Assuming the PHP script sets a header for redirection
+                    var redirectUrl = xhr.responseURL;
+
+                    if (redirectUrl) {
+                        // Redirect the user to the new page
+                        window.location.href = redirectUrl;
                     }
                 };
                 // Créez une chaîne de requête en formatant vos données.

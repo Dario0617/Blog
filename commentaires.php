@@ -5,46 +5,6 @@ $style = "";
     if( isset( $_SESSION['connected'] ) ){
         $style = "style='display:none'";
     }
-?>
-<html lang="fr">
-<head>
-    <title></title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <script src="https://kit.fontawesome.com/d576863e16.js" crossorigin="anonymous"></script>
-</head>
-<header>
-    <div class="row" style="margin-top: 20px; margin-bottom: 20px; padding-left: 20px; padding-right:20px;">
-        <div class="col-12" style="padding-left: 5%;">
-            <ul class="nav nav-tabs justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
-                </li>
-                <li class="nav-item" <?php echo $style;?>>
-                    <a class="nav-link" href="Connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
-                </li>
-                <li class="nav-item" <?php echo $style;?>>
-                    <a class="nav-link" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>
-                </li>
-                <?php if( isset( $_SESSION['connected'] ) ){
-                    echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Profil</a></li>";
-                } 
-                if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                    echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
-                }
-                if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                    echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
-                }
-                if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
-                    echo "<li class='nav-item'><a class='nav-link' href='CreatedTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
-                }if( isset( $_SESSION['connected'] ) ){
-                    echo "<li class='nav-item'><a class='nav-link' style='color:red' href='Logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a></li>";
-                } ?>
-            </ul>
-        </div>
-    </div>
-</header>
-<?php
 
 $idBillet = $_GET['idBillet'];
 
@@ -58,18 +18,64 @@ $reponse = $bdd->prepare( $sql );
 $reponse->execute([':id' => $idBillet]);
 $tableBlog = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = 'SELECT * FROM commentaires WHERE id_billet=:id';
+$sql = 'SELECT * FROM commentaires WHERE id_billet=:id AND verify=:verify';
 $reponse = $bdd->prepare( $sql );
-$reponse->execute([':id' => $idBillet]);
+$reponse->execute([':id' => $idBillet, ':verify'=>1]);
 $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
+$mess = '';
+    if( isset( $_GET['validation'] ) ){
+        $alert = 'alert-success';
+        $mess = 'Commentaire créé avec succès, il va être vérifié par un administrateur';
+    }
 ?>
+<html lang="fr">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="https://kit.fontawesome.com/d576863e16.js" crossorigin="anonymous"></script>
+</head>
+<header>
+    <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 0%; margin-right: 0%; padding-left: 1%; padding-right: 1%;">
+        <div class="col-3">
+            <h1>Billet N°<?=$idBillet?></h1>
+        </div>
+        <div class="col-9">
+            <ul class="nav nav-tabs justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
+                </li>
+                <li class="nav-item" <?=$style?>>
+                    <a class="nav-link" href="Connexion.php"><i class="fa-solid fa-circle-user"></i>&nbsp;Connexion</a>
+                </li>
+                <li class="nav-item" <?=$style?>>
+                    <a class="nav-link" href="Inscription.php"><i class="fa-solid fa-user-plus"></i>&nbsp;Inscription</a>
+                </li>
+                <?php if( isset( $_SESSION['connected'] ) ){
+                    echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-circle-user'></i>&nbsp;Profil</a></li>";
+                } 
+                if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                    echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
+                }
+                if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
+                    echo "<li class='nav-item'><a class='nav-link' href='CommentManagement.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
+                }
+                if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
+                    echo "<li class='nav-item'><a class='nav-link' href='CreatedTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";
+                }if( isset( $_SESSION['connected'] ) ){
+                    echo "<li class='nav-item'><a class='nav-link' style='color:red' href='Logout.php'><i class='fa-solid fa-door-open'></i>&nbsp;Déconnexion</a></li>";
+                } ?>
+            </ul>
+        </div>
+    </div>
+</header>
 <body>
 <section class="container mt-5">
     <div class="row">
         <div class="col-12">
             <?php 
-            foreach($tableBlog as $key => $val){
+                foreach($tableBlog as $key => $val) :
             ?>
                 <div class="card">
                     <h5 class="card-header">Publié le <?=date("d/m/Y à H:i:s", strtotime($val['date_creation']))?></h5>
@@ -79,39 +85,48 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
             <?php
-                }
+                endforeach;
             ?>
         </div>
     </div>
 </section>
 
 <section class="container mt-5">
+    <?php
+        if( isset( $_GET['error'] ) || isset( $_GET['validation'] )) {
+            echo '<div class="row"><p class="col-10 alert '.$alert.'">' . $mess .'</p></div>';
+        }
+    ?>
     <div class="row">
         <div class="col-12">
             <div class="row">
                 <h3>Commentaires</h3>
-                <?php if( isset( $_SESSION['connected'] ) ){
-                    echo '<button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d\'un commentaire</button>';
-                } ?>
+                <?php if( isset( $_SESSION['connected'] ) ) : ?>
+                    <button type="button" class="btn btn-outline-primary btn-lg" style="margin-bottom: 15px" data-toggle="modal" data-target="#exampleModal" id="createCommentaryModal"><i class="fa-solid fa-comment-medical"></i>&nbsp;Création d'un commentaire</button>
+                <?php
+                    endif;
+                ?>
             </div>
             <?php
-                foreach($tableCommentaires as $key => $val){
+                foreach($tableCommentaires as $key => $val) :
             ?>
-            <div class="list-group col-12">
-                <div class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1"><?=$val['auteur']?></h5>
-                        <small><?=$val['auteur']?> le <?=date("d/m/Y à H:i:s", strtotime($val['date_commentaire']))?></small>
-                    </div>
-                    <div class="d-flex align-items-center row">
-                        <p class="mb-1 col-11"><?=$val['commentaire']?></p>
-                        <?php if( isset( $_SESSION['connected'] ) && $val['auteur'] == $_SESSION['login'] ){
-                            echo '<button type="submit" class="btn btn-danger col-1"><i class="fa-solid fa-trash-can"></i></button>';
-                        } ?>
-                    </div>
-            </div>
+                <div class="list-group col-12">
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><?=$val['auteur']?></h5>
+                            <small><?=$val['auteur']?> le <?=date("d/m/Y à H:i:s", strtotime($val['date_commentaire']))?></small>
+                        </div>
+                        <div class="d-flex align-items-center row">
+                            <p class="mb-1 col-11"><?=$val['commentaire']?></p>
+                            <?php if( isset( $_SESSION['connected'] ) && $val['auteur'] == $_SESSION['login'] ) : ?>
+                                <button type="submit" class="btn btn-danger col-1" name="deleteComment" data-ticketId="<?=$idBillet?>" data-commentaryId="<?=$val['id']?>"><i class="fa-solid fa-trash-can"></i></button>
+                            <?php 
+                                endif; 
+                            ?>
+                        </div>
+                </div>
             <?php
-                }
+                endforeach;
             ?>
         </div>
     </div>
@@ -153,6 +168,30 @@ $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
         elem2[1].onclick = function() {
             document.getElementById("exampleModal").style.display = 'none';
         };
+
+        const buttonsDeleteComment = document.getElementsByName("deleteComment");
+        buttonsDeleteComment.forEach((button) => {
+            button.onclick = function() {
+                var xhr = new XMLHttpRequest();
+                // Spécifiez le type de requête (GET ou POST), l'URL du script PHP, et indiquez s'il s'agit d'une requête asynchrone.
+                xhr.open("POST", "DeleteComment.php", true);
+
+                // Définissez l'en-tête de la requête pour indiquer que vous envoyez des données au format formulaire.
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                xhr.onreadystatechange = function () {
+
+                };
+
+                // Créez une chaîne de requête en formatant vos données.
+                var params = "ticketId="+ button.dataset.ticketid + "&commentaryId=" + button.dataset.commentaryid;
+                
+                // Envoyez la requête avec les données.
+                xhr.send(params);
+
+                location.reload();
+            };
+        });
 });
 </script>
 </body>

@@ -25,7 +25,7 @@ if (isset( $_SESSION['login'])){
 
 <body>
     <header>
-        <div class="row" style="margin-top: 20px; padding-left: 20px; padding-right:20px;">
+        <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 0%; margin-right: 0%; padding-left: 1%; padding-right: 1%;">
             <div class="col-8">
                 <h1>Formulaire de connexion</h1>
             </div>

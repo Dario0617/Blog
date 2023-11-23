@@ -19,11 +19,11 @@ if (isset( $_SESSION['login'])){
 ?>
 <body>
     <header>
-        <div class="row" style="margin-top: 20px; margin-bottom: 20px; padding-left: 20px; padding-right:20px;">
+        <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 0%; margin-right: 0%; padding-left: 1%; padding-right: 1%;">
             <div class="col-3">
                 <h1>Création d'un billet</h1>
             </div>
-            <div class="col-9">
+            <div class="col-9" style="padding-left: 5%;">
                 <ul class="nav nav-tabs justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="index.php"><i class="fa-solid fa-house"></i>&nbsp;Accueil</a>
@@ -35,7 +35,7 @@ if (isset( $_SESSION['login'])){
                         echo "<li class='nav-item'><a class='nav-link' href='UserManagement.php'><i class='fa-solid fa-users-gear'></i></i>&nbsp;Gestion des utilisateurs</a></li>";
                     }
                     if( isset( $_SESSION['role']) && ($_SESSION['role'] == 2) ){
-                        echo "<li class='nav-item'><a class='nav-link' href='Profile.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
+                        echo "<li class='nav-item'><a class='nav-link' href='CommentManagement.php'><i class='fa-solid fa-comments'></i></i>&nbsp;Modération des commentaires</a></li>";
                     }
                     if( isset( $_SESSION['role']) && $_SESSION['role'] != 1 ){
                         echo "<li class='nav-item'><a class='nav-link active' href='CreatedTicket.php'><i class='fa-solid fa-ticket'></i>&nbsp;Création d'un billet</a></li>";

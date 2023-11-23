@@ -15,11 +15,13 @@
 
         $text = htmlentities($text,ENT_COMPAT,"ISO-8859-1",true);
 
-        $sql = "INSERT INTO `commentaires` (`id_billet`, `auteur`, `commentaire`, `date_commentaire`) 
-			VALUES (:idBillet, :auteur, :commentaire, :date)";
+        $sql = "INSERT INTO `commentaires` (`id_billet`, `auteur`, `commentaire`, `date_commentaire`, `verify`) 
+			VALUES (:idBillet, :auteur, :commentaire, :date, :verify)";
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':idBillet'=>$idBillet, ':auteur'=>$auteur, 
-		':commentaire'=>$text, ':date'=>$date]);
+		':commentaire'=>$text, ':date'=>$date, ':verify'=>0]);
+        header('Location:Commentaires.php?idBillet=' . $idBillet . '&validation=1');
+        	die;
     }
     header('Location:Commentaires.php?idBillet=' . $idBillet);
         	die;
