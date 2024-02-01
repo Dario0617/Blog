@@ -15,7 +15,7 @@ session_start();
     } catch( Exception $e) {
         die( 'Erreur : ' . $e->getMessage() );
     }
-    $sql = 'SELECT * FROM billets ORDER BY date_creation DESC ';
+    $sql = 'SELECT * FROM Ticket ORDER BY CreationDate DESC ';
     $reponse = $bdd->prepare( $sql );
     $reponse->execute();
     $tableBlog = $reponse->fetchAll(PDO::FETCH_ASSOC);
@@ -23,11 +23,11 @@ session_start();
     $style = "";
     if( isset( $_SESSION['connected'] ) ){
         if ( isset( $_SESSION['id'] ) ){
-            $sql = 'SELECT roleId FROM users WHERE id = :id';
+            $sql = 'SELECT RoleId FROM User WHERE Id = :id';
             $reponse = $bdd->prepare( $sql );
             $reponse->execute(array(':id'=>$_SESSION['id']));
             $role = $reponse->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['role'] = $role["roleId"];
+            $_SESSION['role'] = $role["RoleId"];
         }
         $style = "style='display:none'";
     }
@@ -77,23 +77,21 @@ session_start();
         <div class="row">
             <div class="col-12">
                 <?php 
-                foreach($tableBlog as $key => $val){
+                foreach($tableBlog as $key => $val) :
                 ?>
                     <div class="card">
-                        <h5 class="card-header">Publié le <?=date("d/m/Y à H:i:s", strtotime($val['date_creation']))?></h5>
+                        <h5 class="card-header">Publié le <?=date("d/m/Y à H:i:s", strtotime($val['CreationDate']))?></h5>
                         <div class="card-body">
-                            <h5 class="card-title"><?=$val['titre']?></h5>
-                            <p class="card-text"><?=$val['contenu']?></p>
-                            <a href="Commentaires.php?idBillet=<?=$val['id']?>" class="btn btn-primary">Commentaires</a>
+                            <h5 class="card-title"><?=$val['Title']?></h5>
+                            <p class="card-text"><?=$val['Content']?></p>
+                            <a href="Commentaires.php?idBillet=<?=$val['Id']?>" class="btn btn-primary">Commentaires</a>
                         </div>
                     </div>
                     <br>
                 <?php
-                    }
+                    endforeach;
                 ?>
             </div>
         </div>
     </section>
-
-
 </body>

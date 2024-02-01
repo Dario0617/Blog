@@ -11,13 +11,13 @@
             die('Erreur :' . $e->getMessage());
         }
         
-        $sql = 'SELECT COUNT(*) AS total FROM `commentaires` WHERE id=:id && id_billet=:ticketId';
+        $sql = 'SELECT COUNT(*) AS total FROM `Comment` WHERE Id=:id && TicketId=:ticketId';
 
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':ticketId'=>$ticketId, ':id'=>$commentaryId]);
         $result = $reponse->fetch(PDO::FETCH_ASSOC);
         if ($result['total'] == 1) {
-            $sql = 'DELETE FROM `commentaires` WHERE `commentaires`.`id`=:id';
+            $sql = 'DELETE FROM `Comment` WHERE `Comment`.`Id`=:id';
             $reponse = $bdd->prepare($sql);
             $reponse->execute([':id'=>$commentaryId]);
         } else {

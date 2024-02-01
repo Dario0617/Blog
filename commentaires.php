@@ -13,12 +13,12 @@ try {
 } catch( Exception $e) {
     die( 'Erreur : ' . $e->getMessage() );
 }
-$sql = 'SELECT * FROM billets WHERE id=:id';
+$sql = 'SELECT * FROM Ticket WHERE Id=:id';
 $reponse = $bdd->prepare( $sql );
 $reponse->execute([':id' => $idBillet]);
 $tableBlog = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = 'SELECT * FROM commentaires WHERE id_billet=:id AND verify=:verify';
+$sql = 'SELECT * FROM Comment WHERE TicketId=:id AND Verify=:verify';
 $reponse = $bdd->prepare( $sql );
 $reponse->execute([':id' => $idBillet, ':verify'=>1]);
 $tableCommentaires = $reponse->fetchAll(PDO::FETCH_ASSOC);
@@ -78,10 +78,10 @@ $mess = '';
                 foreach($tableBlog as $key => $val) :
             ?>
                 <div class="card">
-                    <h5 class="card-header">Publié le <?=date("d/m/Y à H:i:s", strtotime($val['date_creation']))?></h5>
+                    <h5 class="card-header">Publié le <?=date("d/m/Y à H:i:s", strtotime($val['CreationDate']))?></h5>
                     <div class="card-body">
-                        <h5 class="card-title"><?=$val['titre']?></h5>
-                        <p class="card-text"><?=$val['contenu']?></p>
+                        <h5 class="card-title"><?=$val['Title']?></h5>
+                        <p class="card-text"><?=$val['Content']?></p>
                     </div>
                 </div>
             <?php
@@ -113,13 +113,13 @@ $mess = '';
                 <div class="list-group col-12">
                     <div class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><?=$val['auteur']?></h5>
-                            <small><?=$val['auteur']?> le <?=date("d/m/Y à H:i:s", strtotime($val['date_commentaire']))?></small>
+                            <h5 class="mb-1"><?=$val['Autor']?></h5>
+                            <small><?=$val['Autor']?> le <?=date("d/m/Y à H:i:s", strtotime($val['CreationDate']))?></small>
                         </div>
                         <div class="d-flex align-items-center row">
-                            <p class="mb-1 col-11"><?=$val['commentaire']?></p>
-                            <?php if( isset( $_SESSION['connected'] ) && $val['auteur'] == $_SESSION['login'] ) : ?>
-                                <button type="submit" class="btn btn-danger col-1" name="deleteComment" data-ticketId="<?=$idBillet?>" data-commentaryId="<?=$val['id']?>"><i class="fa-solid fa-trash-can"></i></button>
+                            <p class="mb-1 col-11"><?=$val['Content']?></p>
+                            <?php if( isset( $_SESSION['connected'] ) && $val['Autor'] == $_SESSION['login'] ) : ?>
+                                <button type="submit" class="btn btn-danger col-1" name="deleteComment" data-ticketId="<?=$idBillet?>" data-commentaryId="<?=$val['Id']?>"><i class="fa-solid fa-trash-can"></i></button>
                             <?php 
                                 endif; 
                             ?>
@@ -192,7 +192,7 @@ $mess = '';
                 location.reload();
             };
         });
-});
+    });
 </script>
 </body>
 </html>

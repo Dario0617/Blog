@@ -15,7 +15,7 @@
 
         $text = htmlentities($text,ENT_COMPAT,"ISO-8859-1",true);
 
-        $sql = "INSERT INTO `commentaires` (`id_billet`, `auteur`, `commentaire`, `date_commentaire`, `verify`) 
+        $sql = "INSERT INTO `Comment` (`TicketId`, `Autor`, `Content`, `CreationDate`, `Verify`) 
 			VALUES (:idBillet, :auteur, :commentaire, :date, :verify)";
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':idBillet'=>$idBillet, ':auteur'=>$auteur, 

@@ -9,14 +9,14 @@
     
         $id = $_SESSION['id'];
     
-        $sql = 'SELECT * FROM users WHERE id=:id';
+        $sql = 'SELECT * FROM User WHERE Id=:id';
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':id'=>$id]);
     
         $valeurs = $reponse->fetch(pdo::FETCH_ASSOC);
 
-        $profilePicture = $valeurs['image'];
-        $login = $valeurs['login'];
+        $profilePicture = $valeurs['ProfilPicture'];
+        $login = $valeurs['Login'];
 
         $profilePictureExist = false;
         if($profilePicture != null){

@@ -11,14 +11,14 @@
             die('Erreur :' . $e->getMessage());
         }
         if (isset($rejected)){
-            $sql = 'DELETE FROM commentaires WHERE id=:id';
+            $sql = 'DELETE FROM Comment WHERE Id=:id';
             $reponse = $bdd->prepare($sql);
             $reponse->execute([':id'=>$commentId]);
             var_dump($reponse);
             header('Location:CommentManagement.php?validation=1&rejected=1');
             die;
         } else {
-            $sql = 'UPDATE commentaires SET verify=:verify WHERE id=:id';
+            $sql = 'UPDATE Comment SET Verify=:verify WHERE Id=:id';
             $reponse = $bdd->prepare($sql);
             $reponse->execute([':verify'=>true, ':id'=>$commentId]);
             header('Location:CommentManagement.php?validation=1');

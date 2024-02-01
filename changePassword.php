@@ -20,7 +20,7 @@
             die('Erreur :' . $e->getMessage());
         }
 
-        $sql = 'UPDATE users SET password=:password WHERE id=:id';
+        $sql = 'UPDATE User SET Password=:password WHERE Id=:id';
         $reponse = $bdd->prepare($sql);
 
         $hashPassword = sodium_crypto_pwhash_str($password, SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE, 

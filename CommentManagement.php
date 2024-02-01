@@ -9,7 +9,7 @@
     
         $id = $_SESSION['id'];
     
-        $sql = 'SELECT * FROM commentaires WHERE verify = :verify';
+        $sql = 'SELECT * FROM Comment WHERE Verify = :verify';
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':verify'=>0]);
     
@@ -99,13 +99,13 @@
                     foreach($comments as $key => $comment){
                     ?>
                         <tr>
-                            <th scope="row"><?=$comment['id']?></td>
-                            <td><?=$comment['id_billet']?></td>
-                            <td><?=$comment['auteur']?></td>
-                            <td><?=$comment['commentaire']?></td>
+                            <th scope="row"><?=$comment['Id']?></td>
+                            <td><?=$comment['TicketId']?></td>
+                            <td><?=$comment['Autor']?></td>
+                            <td><?=$comment['Content']?></td>
                             <td>
-                                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-commentId=<?=$comment['id']?> name="commentAccepted" id="commentAccepted<?=$comment['id']?>"><i class="fa-solid fa-circle-check"></i>&nbsp;Commentaire accepté</button>
-                                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-commentId=<?=$comment['id']?> name="commentRejected" id="commentRejected<?=$comment['id']?>"><i class="fa-solid fa-comment-slash"></i>&nbsp;Commentaire rejeté</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-commentId=<?=$comment['Id']?> name="commentAccepted" id="commentAccepted<?=$comment['Id']?>"><i class="fa-solid fa-circle-check"></i>&nbsp;Commentaire accepté</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-commentId=<?=$comment['Id']?> name="commentRejected" id="commentRejected<?=$comment['Id']?>"><i class="fa-solid fa-comment-slash"></i>&nbsp;Commentaire rejeté</button>
                             </td>
                         </tr>
                     <?php

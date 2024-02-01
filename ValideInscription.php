@@ -20,7 +20,7 @@
         } catch( Exception $e) {
             die( 'Erreur : ' . $e->getMessage() );
         }
-        $sql = 'SELECT * FROM users WHERE login=:login';
+        $sql = 'SELECT * FROM User WHERE Login=:login';
         $reponse = $bdd->prepare( $sql );
         $reponse->execute( [':login'=>$login] );
 
@@ -32,7 +32,7 @@
             $password = sodium_crypto_pwhash_str($password, SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE, 
             SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE);
             $roleUser = 1;
-            $sql = 'INSERT INTO users (login, password, roleId) VALUES (:login,:password, :roleId)';
+            $sql = 'INSERT INTO User (Login, Password, RoleId) VALUES (:login,:password, :roleId)';
             $reponse = $bdd->prepare( $sql );
             $reponse->execute(array(':login'=>$login, ':password'=>$password, ':roleId'=>$roleUser));
             if (!$reponse){

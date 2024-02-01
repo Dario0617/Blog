@@ -11,7 +11,7 @@
             die('Erreur :' . $e->getMessage());
         }
         
-        $sql = 'UPDATE users SET roleId=:roleId WHERE id=:id';
+        $sql = 'UPDATE User SET RoleId=:roleId WHERE Id=:id';
 
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':roleId'=>$roleId, ':id'=>$userId]);  

@@ -10,16 +10,16 @@
         $login = $_POST["login"];
         $password = $_POST["password"];
 
-        $sql = 'SELECT * FROM users WHERE login=:login';
+        $sql = 'SELECT * FROM User WHERE Login=:login';
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':login'=>$login]);
 
         if ($valeurs = $reponse->fetch(pdo::FETCH_ASSOC)){
-            if (sodium_crypto_pwhash_str_verify($valeurs['password'], $password)){
+            if (sodium_crypto_pwhash_str_verify($valeurs['Password'], $password)){
                 header('Location:index.php');
                 $_SESSION['login'] = $login;
                 $_SESSION['connected'] = true;
-                $_SESSION['id'] = $valeurs['id'];
+                $_SESSION['id'] = $valeurs['Id'];
                 die;
             }
             else{

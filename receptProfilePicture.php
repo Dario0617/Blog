@@ -41,7 +41,7 @@
                                 die('Erreur :' . $e->getMessage());
                             }
                             $nameFile = $_FILES["myfile"]["name"];
-                            $sql = 'UPDATE users SET image=:nameFile WHERE id=:id';
+                            $sql = 'UPDATE User SET ProfilPicture=:nameFile WHERE Id=:id';
                             $reponse = $bdd->prepare($sql);
                             $reponse->execute([':id'=>$id, ':nameFile'=>$nameFile]);
                             header('Location:Profile.php');

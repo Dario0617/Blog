@@ -9,7 +9,7 @@
     
         $id = $_SESSION['id'];
     
-        $sql = 'SELECT * FROM users where id <> :id';
+        $sql = 'SELECT * FROM User where Id <> :id';
         $reponse = $bdd->prepare($sql);
         $reponse->execute([':id'=>$id]);
     
@@ -96,28 +96,28 @@
                     foreach($users as $key => $user){
                     ?>
                         <tr>
-                            <th scope="row"><?=$user['id']?></td>
-                            <td><?php if ($user['roleId'] == 1) {
+                            <th scope="row"><?=$user['Id']?></td>
+                            <td><?php if ($user['RoleId'] == 1) {
                                 echo 'Utilisateur';
-                            } else if ($user['roleId'] == 2) {
+                            } else if ($user['RoleId'] == 2) {
                                 echo 'Admin';
                             } else{
                                 echo 'Editeur';
                             }
                             ?>
                             </td>
-                            <td><?=$user['login']?></td>
+                            <td><?=$user['Login']?></td>
                             <td>
-                                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-userId=<?=$user['id']?> name="changePassword" id="changePassword<?=$user['id']?>"><i class="fa-solid fa-key"></i></i>&nbsp;Modification du mot de passe</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-userId=<?=$user['Id']?> name="changePassword" id="changePassword<?=$user['Id']?>"><i class="fa-solid fa-key"></i></i>&nbsp;Modification du mot de passe</button>
                                 <?php 
-                                if ($user['roleId'] != 2) : ?>
-                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['id']?> name="changeToAdmin" id="changeToAdmin<?=$user['id']?>"><i class="fa-solid fa-user-shield"></i></i></i>&nbsp;Passer au rôle "Admin"</button>
+                                if ($user['RoleId'] != 2) : ?>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['Id']?> name="changeToAdmin" id="changeToAdmin<?=$user['Id']?>"><i class="fa-solid fa-user-shield"></i></i></i>&nbsp;Passer au rôle "Admin"</button>
                                 <?php endif;
-                                if ($user['roleId'] != 1) : ?>
-                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['id']?> name="changeToUser" id="changeToUser<?=$user['id']?>"><i class="fa-solid fa-user"></i></i>&nbsp;Passer au rôle "Utilisateur"</button>
+                                if ($user['RoleId'] != 1) : ?>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['Id']?> name="changeToUser" id="changeToUser<?=$user['Id']?>"><i class="fa-solid fa-user"></i></i>&nbsp;Passer au rôle "Utilisateur"</button>
                                 <?php endif;
-                                if ($user['roleId'] != 3) : ?>
-                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['id']?> name="changeToEditor" id="changetoEditor<?=$user['id']?>"><i class="fa-solid fa-user-pen"></i></i>&nbsp;Passer au rôle "Editeur"</button>
+                                if ($user['RoleId'] != 3) : ?>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-userId=<?=$user['Id']?> name="changeToEditor" id="changetoEditor<?=$user['Id']?>"><i class="fa-solid fa-user-pen"></i></i>&nbsp;Passer au rôle "Editeur"</button>
                                 <?php 
                                 endif;
                                 ?>
